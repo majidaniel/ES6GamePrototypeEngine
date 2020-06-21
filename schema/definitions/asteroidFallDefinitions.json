@@ -1,0 +1,76 @@
+[
+    {
+        "type":"Actor",
+        "id":"PlayerWeapon",
+        "behaviors": [
+            {
+                "behavior": "lookAtMouse"
+            }
+        ],
+        "eventMappings":[
+            {"eventKey":"Input.LeftMouseClick","behavior":"shootActiveProjectile"}
+        ],
+        "display":[
+            {
+                "type":"image",
+                "url":"assets/space/PlayerBlue_Frame_01_png_processed.png"
+            }
+        ]
+    },
+    {
+        "type": "Actor",
+        "id": "PlayerBullet",
+        "display":[
+            {
+                "type":"image",
+                "url":"assets/space/Minigun_Small_png_processed.png",
+                "imageWidth": 7,
+                "imageHeight": 17
+            }
+        ],
+        "behaviors":[
+            {"behavior": "slide", "moveVelocity": 400},
+            {
+                "behavior": "twoWayCollision",
+                "checkTarget": "Asteroid",
+                "resultingBehavior": "destroy"
+            }
+        ]
+    },
+    {
+        "type": "Actor",
+        "id": "Asteroid",
+        "behaviors": [
+            {
+            "behavior": "moveTo",
+            "moveTargetX": 300,
+            "moveTargetY": 600,
+            "moveVelocity":50
+            },
+            {
+                "behavior": "collision",
+                "checkTarget": "PlayerWeapon",
+                "resultingBehavior": "destroy"
+            }
+        ],
+        "display":[
+            {
+            "type":"image",
+            "url":"assets/space/Asteroid 01_png_processed.png"
+            }
+        ]
+    },
+    {
+        "type": "Actor",
+        "id": "Asteroid Spawner",
+        "behaviors": [
+            {
+                "behavior":"periodicSpawn",
+                "spawnId":"Asteroid"
+            },
+            {
+                "behavior":"randomToplineMove"
+            }
+        ]
+    }
+]

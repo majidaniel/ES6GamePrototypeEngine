@@ -1,0 +1,20 @@
+{
+	"type": "Scene",
+	"id": "asteroidFall",
+	"contains": [
+		{
+			"definitionId": "Asteroid Spawner",
+			"initialLocation":{
+				"x":0,
+				"y":0
+			}
+		},
+		{
+			"definitionId": "PlayerWeapon",
+			"initialLocation":{
+				"x": 300,
+				"y": 500
+			}
+		}
+	]
+}

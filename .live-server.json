@@ -1,0 +1,8 @@
+{
+	"port": 8181, 
+	"open": true,
+	"file": "index.html", 
+	"wait": 0, 
+	"mount": ["/assets"], 
+	"logLevel": 2
+}
