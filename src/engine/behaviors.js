@@ -14,9 +14,12 @@ export class Behaviors{
         var velocity = behaviorPayload.moveVelocity ? behaviorPayload.moveVelocity : actor.moveVelocity;
         var vector = new Phaser.Math.Vector2(targetX - actor.x,targetY - actor.y);
         vector = vector.normalize();
+        actor.recordDecision("moveTo","moving via vector "+vector.x+":"+vector.y+" to get to "+targetX + ":"+targetY + " per time delta of "+timeDelta);
+        actor.recordDecision("velocity",velocity);
+        actor.recordDecision("position","x:" + actor.x+", y:"+actor.y);
         actor.x += vector.x * velocity * timeDelta;
         actor.y += vector.y * velocity * timeDelta;
-    }
+      }
 
     slide(scene, actor, behaviorPayload,timeDelta){
         var vector = actor.moveVector ? actor.moveVector : behaviorPayload.moveVector;

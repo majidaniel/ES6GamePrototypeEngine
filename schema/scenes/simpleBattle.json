@@ -1,0 +1,15 @@
+{
+	"type": "Scene",
+	"id": "simpleBattle",
+	"fps": 5,
+	"contains": [
+		{
+			"definitionId": "SimpleMeleeSoldier",
+			"initialLocation":{
+				"x":100,
+				"y":0
+            },
+            "team":"A"
+		}
+	]
+}

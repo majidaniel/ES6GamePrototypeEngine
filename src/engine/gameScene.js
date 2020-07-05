@@ -5,13 +5,15 @@ import {UserInputManager} from "../engine/userInputManager"
 import { ActorManager } from "../engine/actorManager";
 
 export class GameScene extends Phaser.Scene {
-    constructor(sceneKey,actorDefinitions,actorInfo) {
+    constructor(sceneKey,actorDefinitions,actorInfo, fpsCap) {
         super({
             key: sceneKey
         });
         this.actorInfo = actorInfo;
         this.actorDefinitions = actorDefinitions;
         this.freeze = false;
+        this.fpsCap = fpsCap;
+        this.cumulativeDelta =0;
 
         //There be dragons here
         //This section is scanning the behaviors folder, then using reflection to copy functionality there into the behaviors class
@@ -52,11 +54,18 @@ export class GameScene extends Phaser.Scene {
     update(time,delta) {
         if(this.freeze)
           return;
+        
+        this.cumulativeDelta += delta;
+        
+        if(this.cumulativeDelta/1000 <= 1/this.fpsCap)
+          return;
+
         for(var i = 0; i < this.actorManager.actorList.length; i++){
           var actor = this.actorManager.actorList[i];
           for(var j = 0; j < actor.behaviors.length; j++){
               try{
-                this.sceneBehaviors[actor.behaviors[j].behavior](this,actor,actor.behaviors[j],delta/1000);
+                this.sceneBehaviors[actor.behaviors[j].behavior](this,actor,actor.behaviors[j],this.cumulativeDelta/1000);
+                this.cumulativeDelta = 0;
               }catch(e){
                 console.log("Behavior actor in "+actor.behaviors[j].behavior + " on actor:");
                 console.log(actor);

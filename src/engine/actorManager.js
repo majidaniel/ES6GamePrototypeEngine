@@ -4,6 +4,8 @@ export class ActorManager{
         this.scene = scene;
         this.actorList = [];
         this.actorDefinitions = actorDefinitions;
+        this.actorDebugs = {};
+        this.heavyDebugMode = true;
     }
 
     getActorsById(actorId){
@@ -39,6 +41,8 @@ export class ActorManager{
         for(var prop in actorProperties)
           actor[prop] = actorProperties[prop];
         this.actorList.push(actor);
+        var self = this;
+        actor.recordDecision = function(key,msg){ self.recordDecision(actor,key,msg)};
       }
 
       removeActor(actor){
@@ -56,5 +60,16 @@ export class ActorManager{
             }
           }
         }
+      }
+
+      recordDecision(actor,key,msg){
+        if(this.heavyDebugMode){
+          if(!this.actorDebugs[actor]) this.actorDebugs[actor] = [];
+          this.actorDebugs[actor].push(key+ ": " + msg);
+        }else{
+          if(!this.actorDebugs[actor]) this.actorDebugs[actor] = [];
+          this.actorDebugs[actor][key] = msg;
+        }
+        
       }
 }

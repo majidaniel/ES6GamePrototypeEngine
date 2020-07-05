@@ -15,7 +15,7 @@ var path = require('path');
          colors: true
      },
      watchOptions: {
-         ignored: [/node_modules/,/build/]
+         ignored: [/node_modules/,/build/,'build/**']
      },
      devtool: 'source-map'
  };

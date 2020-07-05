@@ -45,10 +45,9 @@ window.onload = () => {
   const sceneContext = require.context('../schema/scenes', false, /\.json$/);
   sceneContext.keys().forEach((key) => {
     const obj = sceneContext(key);
-    scenes[obj.id] = new GameScene('GameScene',actorDefinitions,obj.contains);
+    scenes[obj.id] = new GameScene('GameScene',actorDefinitions,obj.contains,obj.fps ? obj.fps : 60);
   });
 
-  //var myScene = new GameScene('GameScene',actorDefinitions,actorData.contains);
   window.scenes = scenes;
 
   var gameJson =  require("../schema/game.json");

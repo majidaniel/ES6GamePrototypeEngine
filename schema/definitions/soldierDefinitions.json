@@ -1,0 +1,22 @@
+[
+    {
+        "type":"Actor",
+        "id":"SimpleMeleeSoldier",
+        "behaviors": [
+            {
+                "behavior": "attackMove",
+                "baseMoveSpeed": 5
+            }
+        ],
+        "eventMappings":[
+        ],
+        "display":[
+            {
+                "type":"image",
+                "url":"assets/simpleBattle/blueSoldier.png",
+                "imageWidth":25,
+                "imageHeight":25
+            }
+        ]
+    }
+]
